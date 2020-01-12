@@ -172,7 +172,16 @@ module.exports = class extends Generator {
       local = 'types/'
       localIndex = local + 'index.js'
       const stitchFile = local + '_stitch.graphql'
-      touchFile(stitchFile)
+
+      if (!this.fs.exists(stitchFile)) {
+        this.fs.copyTpl(
+          this.templatePath('_stitch.graphql'),
+          this.destinationPath(stitchFile),
+          //{ name, version }
+        )
+        this.log(`created \x1b[36m\x1b[1m ${stitchFile} \x1b[0m`)
+          
+      }
 
       if (!localIndexExists()) {
         this.fs.copyTpl(

@@ -4,5 +4,5 @@ import stitchTypes from './_stitch.graphql'
 
 export default [
   <%= name %>Types,
-  ...stitchTypes
+  stitchTypes
 ]

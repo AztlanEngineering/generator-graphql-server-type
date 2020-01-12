@@ -3,9 +3,9 @@ extend type Query {
   get<%= name %>: <%= name %>
 }
 
-extend type Mutation {
+#extend type Mutation {
   #mutate<%= name %>(id: ID!, input: <%= name %>Input!): <%= name %>!
-  }
+  # }
 
 #input <%= name %>Input {
   #y:String
