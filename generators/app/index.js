@@ -9,12 +9,6 @@ const replace = require('replace-in-file')
 let pjson = require('../../package.json')
 const version = pjson.version
 
-function pascalToSnake(s){
-  return s
-    .replace(/(?:^|\.?)([A-Z])/g, (x,y) => '_' + y.toLowerCase())
-    .replace(/^_/, '')
-}
-
 module.exports = class extends Generator {
   constructor(args, opts) {
     super(args, opts)
@@ -24,6 +18,8 @@ module.exports = class extends Generator {
 
     this.option('validation', { type: String, alias: 'v' })
 
+    this.option('mini', { type: Boolean, alias: 'm' })
+
   }
 
   writing() {
@@ -31,7 +27,8 @@ module.exports = class extends Generator {
     /* Setting up variables */
     const {
       name:fullname,
-      validation
+      validation,
+      mini
     } = this.options
 
     const [pkg,schema] = fullname.split('|')
@@ -42,8 +39,11 @@ module.exports = class extends Generator {
 
     this.log(
       `Generating files for module \x1b[32m\x1b[1m${pkg}\x1b[0m`,
-      schema ? ` and schema \x1b[34m\x1b[1m${schema}\x1b[0m` : null,
-      validation ? `and validation file \x1b[33m\x1b[1m${validation}\x1b[0m` : null,
+      schema ? ` and schema \x1b[34m\x1b[1m${schema}\x1b[0m` : '',
+      validation ? `and validation file \x1b[33m\x1b[1m${validation}\x1b[0m` : '',
+      '\n',
+      'Mini mode (-m) : ',
+      mini ? '\x1b[35mENABLED\x1b[0m' : '\x1b[31mDISABLED\x1b[0m',
       '\n'
     )
     //const lower = pascalToSnake()
@@ -52,14 +52,22 @@ module.exports = class extends Generator {
     }
 
     /* Making the new folder */
-    const madeFolders = {
-		  root       :mkdirp.sync(pkg),
-      controllers:mkdirp.sync(pkg + '/controllers'),
-      resolvers  :mkdirp.sync(pkg + '/resolvers'),
-      types      :mkdirp.sync(pkg + '/types'),
-      models     :mkdirp.sync(pkg + '/models'),
-      validation :validation && mkdirp.sync(pkg + '/validation')
+    let madeFolders = {
+		  root:mkdirp.sync(pkg)
     }
+
+    if (schema) {
+      madeFolders.resolvers=mkdirp.sync(pkg + '/resolvers')
+      madeFolders.types    =mkdirp.sync(pkg + '/types')
+    }
+    if (schema && !mini) {
+      madeFolders.controllers=mkdirp.sync(pkg + '/controllers')
+      madeFolders.models     =mkdirp.sync(pkg + '/models')
+    }
+    if (validation) {
+      madeFolders.validation =mkdirp.sync(pkg + '/validation')
+    }
+    
 
     Object.keys(madeFolders).forEach((e) => {
       madeFolders[e] ? this.log('created folder ', `\x1b[1m\x1b[36m ${e} \x1b[0m`) :
@@ -89,26 +97,31 @@ module.exports = class extends Generator {
       }
 
       /* Controller */
-      local = 'controllers/'
-      localIndex = local + 'index.js'
-      createOrAppendToIndex(`export { default as ${schema}Controller } from './${schema}'\n`)
+      if (!mini){
 
-      this.fs.copyTpl(
-        this.templatePath('controller.js'),
-        this.destinationPath(path.join(local, schema + '.js')),
-        { name, version }
-      )
+        local = 'controllers/'
+        localIndex = local + 'index.js'
+        createOrAppendToIndex(`export { default as ${schema}Controller } from './${schema}'\n`)
+
+        this.fs.copyTpl(
+          this.templatePath('controller.js'),
+          this.destinationPath(path.join(local, schema + '.js')),
+          { name, version }
+        )
+      }
 
       /* Model */
-      local = 'models/'
-      localIndex = local + 'index.js'
-      createOrAppendToIndex(`export { default as ${schema} } from './${schema}'\n`)
+      if (!mini){
+        local = 'models/'
+        localIndex = local + 'index.js'
+        createOrAppendToIndex(`export { default as ${schema} } from './${schema}'\n`)
 
-      this.fs.copyTpl(
-        this.templatePath('model.js'),
-        this.destinationPath(path.join(local, schema + '.js')),
-        { lower_plural, version }
-      )
+        this.fs.copyTpl(
+          this.templatePath('model.js'),
+          this.destinationPath(path.join(local, schema + '.js')),
+          { lower_plural, version }
+        )
+      }
 
       /* Resolvers */
       local = 'resolvers/'
@@ -140,11 +153,20 @@ module.exports = class extends Generator {
         this.log(`with ${JSON.stringify(rResults1)}`)
       }
 
-      this.fs.copyTpl(
-        this.templatePath('resolvers.js'),
-        this.destinationPath(path.join(local, schema + '.js')),
-        { name, version }
-      )
+      if (!mini){
+        this.fs.copyTpl(
+          this.templatePath('resolvers.js'),
+          this.destinationPath(path.join(local, schema + '.js')),
+          { name, version }
+        )
+      }
+      else {
+        this.fs.copyTpl(
+          this.templatePath('resolvers.mini.js'),
+          this.destinationPath(path.join(local, schema + '.js')),
+          { name, version }
+        )
+      }
 
       /* Types */
       local = 'types/'
@@ -180,11 +202,21 @@ module.exports = class extends Generator {
         this.log(`with ${JSON.stringify(rResults1)}`)
       }
 
-      this.fs.copyTpl(
-        this.templatePath('type.graphql'),
-        this.destinationPath(path.join(local, schema + '.graphql')),
-        { name, version }
-      )
+      if (!mini){
+        this.fs.copyTpl(
+          this.templatePath('type.graphql'),
+          this.destinationPath(path.join(local, schema + '.graphql')),
+          { name, version }
+        )
+      }
+      else {
+        this.fs.copyTpl(
+          this.templatePath('type.mini.graphql'),
+          this.destinationPath(path.join(local, schema + '.graphql')),
+          { name, version }
+        )
+
+      }
       //createOrAppendToIndex(`yoyoyo ${schema}`)
 
     }

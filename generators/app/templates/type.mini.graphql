@@ -1,0 +1,16 @@
+# Generator version : <%= version %>
+extend type Query {
+  get<%= name %>: <%= name %>
+}
+
+extend type Mutation {
+  #mutate<%= name %>(id: ID!, input: <%= name %>Input!): <%= name %>!
+  }
+
+#input <%= name %>Input {
+  #y:String
+# }
+
+type <%= name %> {
+  y:String
+}
