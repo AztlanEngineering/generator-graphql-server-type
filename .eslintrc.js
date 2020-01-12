@@ -14,60 +14,37 @@ module.exports = {
   },
   'extends': [
     'eslint:recommended',
-    'plugin:react/recommended'
+    'eslint-config-synacor'
   ],
-  'parserOptions': {
-    'ecmaFeatures': {
-      'jsx': true
-    },
-    'ecmaVersion': 2018,
-    'sourceType': 'module'
-  },
-  'parser': 'babel-eslint',
   'plugins': [
-    'babel'
   ],
-  'rules': {
+  'parser': 'babel-eslint',
+  'rules':{
     'indent': [
       'error',
-			2,
-			{'ignoredNodes': ['JSXElement']}
+      2,
     ],
-    'linebreak-style': [
-      'error',
-      'unix'
-    ],
-    'quotes': [
-      'error',
-			"single",
-			{ "allowTemplateLiterals": true }
-    ],
-    'semi': [
+    'semi':[
       'error',
       'never'
     ],
-    'no-trailing-spaces': [
-      'error', { 'skipBlankLines': false }
+    'key-spacing': [
+      "error", {
+        "multiLine": {
+          "beforeColon": false,
+          "afterColon": false
+        },
+         "align": {
+          "beforeColon": false,
+          "afterColon": false,
+          "on": "colon"
+        }
+      }
     ],
-    'no-console': 0,
-    'array-bracket-newline': [
-      'error', 'consistent'
+    'no-unused-vars': [
+      "error", 
+      { "varsIgnorePattern": "h|Fragment|React"}
     ],
-    'multiline-comment-style': [
-      'error', 'bare-block'
-    ],
-    'jsx-quotes': [
-      'error', 'prefer-single'
-    ],
-    'no-tabs': [
-      'error', { 'allowIndentationTabs': false }
-    ],
-    'no-mixed-spaces-and-tabs': [
-      'error'
-    ],
-		'no-unused-vars' :[
-			"warn"
-		],
-  }
+    'quote-props': ["error", "consistent-as-needed"]
+  },
 }
-

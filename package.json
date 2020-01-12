@@ -1,8 +1,8 @@
 {
-  "name": "@fwrlines/generator-react-component",
-  "version": "0.3.5",
-  "description": "Creates a component for react 16.8 with a custom name and a scss file. To be used with @fwrlines/scss",
-  "homepage": "https://github.com/fwrlines/generator-react-component",
+  "name": "@fwrlines/generator-graphql-server-type",
+  "version": "0.0.1",
+  "description": "Generates a type and the surrounding folders for graphql server",
+  "homepage": "https://github.com/fwrlines/generator-graphql-server-type",
   "author": {
     "name": "fwrlines",
     "email": "800@779.mx",
@@ -17,24 +17,28 @@
     "yeoman-generator"
   ],
   "devDependencies": {
-    "yeoman-test": "^1.7.0",
-    "yeoman-assert": "^3.1.0",
     "coveralls": "^3.0.5",
     "eslint": "^6.0.1",
-    "prettier": "^1.18.2",
-    "husky": "^3.0.1",
-    "lint-staged": "^9.2.0",
     "eslint-config-prettier": "^6.0.0",
-    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-config-synacor": "^3.0.5",
     "eslint-config-xo": "^0.26.0",
-    "jest": "^24.8.0"
+    "eslint-plugin-ejs": "0.0.2",
+    "eslint-plugin-prettier": "^3.1.0",
+    "husky": "^3.0.1",
+    "jest": "^24.8.0",
+    "lint-staged": "^9.2.0",
+    "prettier": "^1.18.2",
+    "yeoman-assert": "^3.1.0",
+    "yeoman-test": "^1.7.0"
   },
   "engines": {
     "npm": ">= 4.0.0"
   },
   "dependencies": {
-    "yeoman-generator": "^2.0.1",
+    "babel-eslint": "^10.0.3",
     "chalk": "^2.1.0",
+    "replace-in-file": "^5.0.2",
+    "yeoman-generator": "^2.0.1",
     "yosay": "^2.0.1"
   },
   "jest": {
@@ -68,7 +72,8 @@
   },
   "scripts": {
     "pretest": "eslint .",
-    "test": "jest"
+    "test": "jest",
+    "test-eslint": "eslint generators/app/index.js"
   },
   "repository": "fwrlines/generator-react-component",
   "license": "MIT"

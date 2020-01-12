@@ -1,0 +1,69 @@
+extend type Query {
+ 	allUsers: [User]!
+ 	user(id:ID!): User
+ 	me: User
+  hello: String!
+}
+
+extend type Mutation {
+ 	addUser(input:UserInput): User!,
+ 	updateUser(id: ID!, input:UserInput): User!,
+ 	updateMe(input:MeInput): User!,
+ 	deleteUser(id: ID!): Boolean!,
+ 	changePassword(id: ID!, password: String!): Boolean!,
+ 	changeMyPassword(password: String!): Boolean!,
+ 	login(input: UserLogin): Token!,
+  signup(input: UserInput): Token!,
+}
+
+input UserInput {
+  first_name: String
+  last_name: String
+  email: String
+  username: String
+  password: String
+  superuser: Boolean
+  operator: Boolean
+  handle: String
+  profile_picture: String
+}
+
+input MeInput {
+  first_name: String
+  last_name: String
+  email: String
+  username: String
+  password: String
+  handle: String
+  profile_picture: String
+}
+
+input UserLogin {
+  email: String!
+  password:String!
+}
+
+type User {
+ 	id: ID
+ 	ts_created: String
+ 	ts_updated: String
+ 	first_name: String
+ 	last_name: String
+ 	email: String
+  username: String
+  superuser: Boolean
+  operator: Boolean
+  password: String
+  handle: String
+  profile_picture: String
+}
+
+type MinUser {
+ 	id: ID
+ 	first_name: String
+ 	last_name: String
+  username: String
+  handle: String
+  profile_picture: String
+}
+

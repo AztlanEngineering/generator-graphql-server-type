@@ -1,0 +1,38 @@
+# Generator version : <%= version %>
+extend type Query {
+  all<%= name %>s: [<%= name %>]
+  get<%= name %>: <%= name %>
+  #paginated<%= name %> (page:Int, category: String):Paginated<%= name %>s
+}
+
+extend type Mutation {
+  add<%= name %>(input:<%= name %>Input!): <%= name %>!
+  update<%= name %>(id: ID!, input: <%= name %>Input!): <%= name %>!
+  delete<%= name %>(id: ID!): Boolean!
+  }
+
+input <%= name %>Input {
+  x:Int
+  y:String
+  z:Boolean
+  }
+
+type <%= name %> {
+  id:ID
+  x:Int
+  y:String
+  z:Boolean
+}
+
+#type Paginated<%= name %>s {
+#  docs: [<%= name %>]
+#  totalDocs: Int!
+#  limit: Int!
+#  hasPrevPage: Boolean!
+#  hasNextPage: Boolean!
+#  page: Int!
+#  totalPages: Int!
+#  pagingCounter: Int!
+#  prevPage: Int
+#  nextPage: Int
+#}
