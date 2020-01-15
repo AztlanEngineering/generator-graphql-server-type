@@ -2,7 +2,7 @@
 import {
   <%= name %> as Model
 } from '../models'
-import { ObjectNotFoundError } from 'utils/errors'
+import { ObjectNotFoundError } from 'utils'
 
 
 /*
@@ -54,7 +54,7 @@ const Controller = {
 
 	 update:async (root, { input, id }) => {
     const tempItem = { input }
-    //tempItem.ts_updated = Date.now()
+    //tempItem.ts_updated = Date.now() //Deprecated
     const updatedItem = await Model.findByIdAndUpdate(
       id,
       { $set: tempItem },

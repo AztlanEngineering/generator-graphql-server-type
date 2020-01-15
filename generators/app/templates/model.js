@@ -23,6 +23,12 @@ const MainSchema = new mongoose.Schema({
     
   },
   maddke_slug:String
+},
+{ 
+	timestamps: {
+		createdAt:'ts_created',
+		updatedAt:'ts_updated
+	} 
 })
 
 //MainSchema.plugin(require('mongoose-autopopulate'))
