@@ -1,6 +1,6 @@
 {
   "name": "@fwrlines/generator-graphql-server-type",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Generates a type and the surrounding folders for graphql server",
   "homepage": "https://github.com/fwrlines/generator-graphql-server-type",
   "author": {
