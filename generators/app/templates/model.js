@@ -10,8 +10,6 @@ const ChildSchema = new mongoose.Schema({
 
 const MainSchema = new mongoose.Schema({
   email     :String,
-  ts_created:{ type: Date, default: Date.now },
-  ts_updated:{ type: Date, default: Date.now },
   y         :Boolean,
   z         :[
     ChildSchema
