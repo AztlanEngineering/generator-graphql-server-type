@@ -7,7 +7,7 @@ export default {
   Query:{
     get<%= name %>(r, a, c) {
       // use context if you want to restrict the usage
-      return "mini hello"
+      return {y:"mini hello"}
       //return su(MainController.get(r, a), c.user)
     }
   }

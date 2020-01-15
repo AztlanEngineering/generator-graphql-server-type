@@ -2,6 +2,7 @@
 import {
   <%= name %> as Model
 } from '../models'
+import { ObjectNotFoundError } from 'utils/errors'
 
 
 /*

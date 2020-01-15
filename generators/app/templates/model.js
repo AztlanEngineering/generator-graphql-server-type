@@ -15,11 +15,19 @@ const MainSchema = new mongoose.Schema({
   y         :Boolean,
   z         :[
     ChildSchema
-  ]
+  ],
+  make:{
+    type :ObjectId,
+    ref  :'Make',
+    index:true
+    
+  },
+  maddke_slug:String
 })
 
 //MainSchema.plugin(require('mongoose-autopopulate'))
 //MainSchema.plugin(require('mongoose-paginate-v2'))
+//ModelSchema.index({ name: 1, year: 1}, { unique: true })
 
 const Model = mongoose.model('<%= lower_plural %>', MainSchema)
 
