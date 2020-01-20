@@ -1,4 +1,4 @@
-/* @fwrlines/generator-graphql-server-type <%= version %> */
+/* <%= pkg %> <%= version %> */
 import <%= name %>Types from './<%= name %>.graphql'
 import stitchTypes from './_stitch.graphql'
 

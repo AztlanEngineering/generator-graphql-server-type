@@ -1,4 +1,4 @@
-/* @fwrlines/generator-graphql-server-type <%= version %> */
+/* <%= pkg %> <%= version %> */
 import {
   <%= name %> as Model
 } from '../models'

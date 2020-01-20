@@ -8,6 +8,7 @@ const replace = require('replace-in-file')
 
 let pjson = require('../../package.json')
 const version = pjson.version
+const pkg = pjson.name
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -31,14 +32,14 @@ module.exports = class extends Generator {
       mini
     } = this.options
 
-    const [pkg,schema] = fullname.split('|')
+    const [localpkg,schema] = fullname.split('|')
     const lower = schema ? schema.toLowerCase() : null
     const lower_plural = lower ? lower + 's' : null
     const camel = schema.charAt(0).toLowerCase() + schema.slice(1)
     const name = schema
 
     this.log(
-      `Generating files for module \x1b[32m\x1b[1m${pkg}\x1b[0m`,
+      `Generating files for module \x1b[32m\x1b[1m${localpkg}\x1b[0m`,
       schema ? ` and schema \x1b[34m\x1b[1m${schema}\x1b[0m` : '',
       validation ? `and validation file \x1b[33m\x1b[1m${validation}\x1b[0m` : '',
       '\n',
@@ -53,19 +54,19 @@ module.exports = class extends Generator {
 
     /* Making the new folder */
     let madeFolders = {
-		  root:mkdirp.sync(pkg)
+		  root:mkdirp.sync(localpkg)
     }
 
     if (schema) {
-      madeFolders.resolvers=mkdirp.sync(pkg + '/resolvers')
-      madeFolders.types    =mkdirp.sync(pkg + '/types')
+      madeFolders.resolvers=mkdirp.sync(localpkg + '/resolvers')
+      madeFolders.types    =mkdirp.sync(localpkg + '/types')
     }
     if (schema && !mini) {
-      madeFolders.controllers=mkdirp.sync(pkg + '/controllers')
-      madeFolders.models     =mkdirp.sync(pkg + '/models')
+      madeFolders.controllers=mkdirp.sync(localpkg + '/controllers')
+      madeFolders.models     =mkdirp.sync(localpkg + '/models')
     }
     if (validation) {
-      madeFolders.validation =mkdirp.sync(pkg + '/validation')
+      madeFolders.validation =mkdirp.sync(localpkg + '/validation')
     }
     
 
@@ -74,7 +75,7 @@ module.exports = class extends Generator {
         this.log(`folder \x1b[36m\x1b[1m ${e} \x1b[0m already present, skipping mkdir`)
     })
 
-    const folder = './' + pkg  +'/'
+    const folder = './' + localpkg  +'/'
     this.destinationRoot(folder)
 
     if (schema) {
@@ -106,7 +107,7 @@ module.exports = class extends Generator {
         this.fs.copyTpl(
           this.templatePath('controller.js'),
           this.destinationPath(path.join(local, schema + '.js')),
-          { name, version }
+          { name, version, pkg }
         )
       }
 
@@ -119,7 +120,7 @@ module.exports = class extends Generator {
         this.fs.copyTpl(
           this.templatePath('model.js'),
           this.destinationPath(path.join(local, schema + '.js')),
-          { lower_plural, version }
+          { lower_plural, version, pkg }
         )
       }
 
@@ -130,7 +131,7 @@ module.exports = class extends Generator {
         this.fs.copyTpl(
           this.templatePath('index.resolvers.js'),
           this.destinationPath(localIndex),
-          { name, version }
+          { name, version, pkg }
         )
         this.log(`created \x1b[36m\x1b[1m ${localIndex} \x1b[0m`)
       }
@@ -157,14 +158,14 @@ module.exports = class extends Generator {
         this.fs.copyTpl(
           this.templatePath('resolvers.js'),
           this.destinationPath(path.join(local, schema + '.js')),
-          { name, version }
+          { name, version, pkg }
         )
       }
       else {
         this.fs.copyTpl(
           this.templatePath('resolvers.mini.js'),
           this.destinationPath(path.join(local, schema + '.js')),
-          { name, version }
+          { name, version, pkg }
         )
       }
 
@@ -187,7 +188,7 @@ module.exports = class extends Generator {
         this.fs.copyTpl(
           this.templatePath('index.types.js'),
           this.destinationPath(localIndex),
-          { name, version }
+          { name, version, pkg }
         )
         this.log(`created \x1b[36m\x1b[1m ${localIndex} \x1b[0m`)
       }
@@ -215,14 +216,14 @@ module.exports = class extends Generator {
         this.fs.copyTpl(
           this.templatePath('type.graphql'),
           this.destinationPath(path.join(local, schema + '.graphql')),
-          { name, version }
+          { name, version, pkg }
         )
       }
       else {
         this.fs.copyTpl(
           this.templatePath('type.mini.graphql'),
           this.destinationPath(path.join(local, schema + '.graphql')),
-          { name, version }
+          { name, version, pkg }
         )
 
       }

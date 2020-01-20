@@ -1,3 +1,4 @@
+/* <%= pkg %> <%= version %> */
 import V from 'validator'
 import { isEmpty } from 'utils'
 
