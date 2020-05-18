@@ -18,10 +18,12 @@ input <%= name %>Input {
   }
 
 type <%= name %> {
-  id:ID
+  id:ID!
   x:Int
   y:String
   z:Boolean
+  createdAt:Float
+  updatedAt:Float
 }
 
 #type Paginated<%= name %>s {

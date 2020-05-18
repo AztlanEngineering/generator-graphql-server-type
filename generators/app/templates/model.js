@@ -2,18 +2,20 @@
 import { Sequelize, DataTypes, Model } from 'sequelize'
 import sequelize from 'connector'
 
-class <%= Schema %> extends Model {
+class <%= schema %> extends Model {
 
+  /*
   static classLevelMethod() {
   }
 
   instanceLevelMethod() {
     return this.first_name
   }
+  */
 
 } 
 
-<%= Schema %>.init({
+<%= schema %>.init({
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -50,11 +52,11 @@ class <%= Schema %> extends Model {
   */
 },{
   sequelize,
-  modelName:'<%= Schema %>',
+  modelName:'<%= schema %>',
   //tableName: '<%= lower_plural %>'
   //freezeTableName: true
 })
 
-//<%= Schema %>.addHook('afterCreate', 'hookName', (e, options) => {})
+//<%= schema %>.addHook('afterCreate', 'hookName', (e, options) => {})
 
-export default <%= Schema %>
+export default <%= schema %>
