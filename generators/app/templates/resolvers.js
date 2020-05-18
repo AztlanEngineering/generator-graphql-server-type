@@ -4,7 +4,7 @@ import { suMethod as su } from 'utils'
 
 export default {
   Mutation:{
-    add<%= name %>(r, a, c) {
+    async add<%= name %>(r, a, c) {
       return su(MainController.add(r, a), c.user)
     },
     async delete<%= name %>(r, a, c) {
