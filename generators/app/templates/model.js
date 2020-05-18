@@ -1,38 +1,60 @@
 /* <%= pkg %> <%= version %> */
-import mongoose from 'mongoose'
+import { Sequelize, DataTypes, Model } from 'sequelize'
+import sequelize from 'connector'
 
-/*
-const ChildSchema = new mongoose.Schema({
-  ts_created   :{ type: Date, default: Date.now },
-  ts_updated   :{ type: Date, default: Date.now }
-})
-*/
+class <%= Schema %> extends Model {
 
-const MainSchema = new mongoose.Schema({
-  email     :String,
-  y         :Boolean,
-  z         :[
-    ChildSchema
-  ],
-  make:{
-    type :ObjectId,
-    ref  :'Make',
-    index:true
-    
+  static classLevelMethod() {
+  }
+
+  instanceLevelMethod() {
+    return this.first_name
+  }
+
+} 
+
+<%= Schema %>.init({
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey:true,
   },
-  maddke_slug:String
-},
-{ 
-	timestamps: {
-		createdAt:'ts_created',
-		updatedAt:'ts_updated
-	} 
+  a: {
+    type: DataTypes.STRING,
+    //type: DataTypes.BOOLEAN,
+    //type: DataTypes.INTEGER,
+    //type: DataTypes.BIGINT,
+    allowNull: false,
+    defaultValue:'john',
+    //unique:true
+    //field:'column_name_here'
+  },
+
+  createdAt: {
+    allowNull: false,
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+  },
+
+  updatedAt: {
+    allowNull: false,
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+  },
+
+  /*
+  uuid:{
+    type: DataTypes.UUID,
+    defaultValue: Sequelize.UUIDV4
+  }
+  */
+},{
+  sequelize,
+  modelName:'<%= Schema %>',
+  //tableName: '<%= lower_plural %>'
+  //freezeTableName: true
 })
 
-//MainSchema.plugin(require('mongoose-autopopulate'))
-//MainSchema.plugin(require('mongoose-paginate-v2'))
-//ModelSchema.index({ name: 1, year: 1}, { unique: true })
+//<%= Schema %>.addHook('afterCreate', 'hookName', (e, options) => {})
 
-const Model = mongoose.model('<%= lower_plural %>', MainSchema)
-
-export default Model
+export default <%= Schema %>

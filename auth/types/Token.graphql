@@ -1,5 +1,0 @@
-type Token {
-  token: String!
-  duration: String!
-}
-
