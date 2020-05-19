@@ -1,0 +1,40 @@
+# @fwrlines/generator-graphql-server-type 2.0.1 
+extend type Query {
+  allMakes: [Make]
+  getMake(id: ID!): Make
+  #paginatedMake (page:Int, category: String):PaginatedMakes
+}
+
+extend type Mutation {
+  addMake(input:MakeInput!): Make!
+  updateMake(id: ID!, input: MakeInput!): Make!
+  deleteMake(id: ID!): Boolean!
+  }
+
+input MakeInput {
+  x:Int
+  y:String
+  z:Boolean
+  }
+
+type Make {
+  id:ID!
+  x:Int
+  y:String
+  z:Boolean
+  createdAt:Float
+  updatedAt:Float
+}
+
+#type PaginatedMakes {
+#  docs: [Make]
+#  totalDocs: Int!
+#  limit: Int!
+#  hasPrevPage: Boolean!
+#  hasNextPage: Boolean!
+#  page: Int!
+#  totalPages: Int!
+#  pagingCounter: Int!
+#  prevPage: Int
+#  nextPage: Int
+#}

@@ -1,0 +1,40 @@
+# @fwrlines/generator-graphql-server-type 2.0.1 
+extend type Query {
+  allServices: [Service]
+  getService(id: ID!): Service
+  #paginatedService (page:Int, category: String):PaginatedServices
+}
+
+extend type Mutation {
+  addService(input:ServiceInput!): Service!
+  updateService(id: ID!, input: ServiceInput!): Service!
+  deleteService(id: ID!): Boolean!
+  }
+
+input ServiceInput {
+  x:Int
+  y:String
+  z:Boolean
+  }
+
+type Service {
+  id:ID!
+  x:Int
+  y:String
+  z:Boolean
+  createdAt:Float
+  updatedAt:Float
+}
+
+#type PaginatedServices {
+#  docs: [Service]
+#  totalDocs: Int!
+#  limit: Int!
+#  hasPrevPage: Boolean!
+#  hasNextPage: Boolean!
+#  page: Int!
+#  totalPages: Int!
+#  pagingCounter: Int!
+#  prevPage: Int
+#  nextPage: Int
+#}

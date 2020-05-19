@@ -93,8 +93,30 @@ module.exports = class extends Generator {
           touchFile(localIndex)
         }
 
-        fs.appendFileSync(fullPathLocalIndex, a)
-        this.log(`updated \x1b[36m\x1b[1m ${localIndex} \x1b[0m`)
+        const currentIndexContent = fs.readFileSync(fullPathLocalIndex, { encoding: 'utf8', flag: 'r' })
+        const shouldNotIncludeString = a.substring(0, a.length-2)
+        
+        if (!currentIndexContent.includes(shouldNotIncludeString)) {
+          fs.appendFileSync(fullPathLocalIndex, a)
+          this.log(`updated \x1b[36m\x1b[1m ${localIndex} \x1b[0m`)
+        }
+        else {
+          this.log(`not updated \x1b[33m\x1b[1m ${localIndex} \x1b[0m because the module is already exported`)
+        }
+
+      }
+
+      /* Tests */
+      if (!mini){
+        local = 'tests/'
+        //localIndex = local + 'index.js'
+        //createOrAppendToIndex(`export { default as ${schema} } from './${schema}'\n`)
+
+        this.fs.copyTpl(
+          this.templatePath('tests.js'),
+          this.destinationPath(path.join(local, schema + '.js')),
+          { name, schema, lower_plural, version, pkg }
+        )
       }
 
       /* Controller */
@@ -136,22 +158,34 @@ module.exports = class extends Generator {
         this.log(`created \x1b[36m\x1b[1m ${localIndex} \x1b[0m`)
       }
       else {
-        const options1 = {
-          files:localIndex,
-          from :/\[/,
-          to   :`\[\n  ${name}Resolvers,`
-        }
-        const options2 = {
-          files:localIndex,
-          from :/import/,
-          to   :`import ${name}Resolvers from './${name}'\nimport`
-        }
 
-        const rResults1 = replace.sync(options1)
-        const rResults2 = replace.sync(options2)
+        const fullPathLocalIndex = path.resolve(path.join(process.cwd(), localIndex))
 
-        this.log(`updated \x1b[36m\x1b[1m ${localIndex} \x1b[0m`)
-        this.log(`with ${JSON.stringify(rResults1)}`)
+        const currentIndexContent = fs.readFileSync(fullPathLocalIndex, { encoding: 'utf8', flag: 'r' })
+        const shouldNotIncludeString = `${name}Resolvers`
+        
+        if (!currentIndexContent.includes(shouldNotIncludeString)) {
+
+          const options1 = {
+            files:localIndex,
+            from :/\[/,
+            to   :`\[\n  ${name}Resolvers,`
+          }
+          const options2 = {
+            files:localIndex,
+            from :/import/,
+            to   :`import ${name}Resolvers from './${name}'\nimport`
+          }
+
+          const rResults1 = replace.sync(options1)
+          const rResults2 = replace.sync(options2)
+
+          this.log(`updated \x1b[36m\x1b[1m ${localIndex} \x1b[0m`)
+          tI//his.log(`with ${JSON.stringify(rResults1)}`)
+        }
+        else {
+          this.log(`not updated \x1b[33m\x1b[1m ${localIndex} \x1b[0m because the module is already exported`)
+        }
       }
 
       if (!mini){
@@ -194,22 +228,33 @@ module.exports = class extends Generator {
       }
 
       else {
-        const options1 = {
-          files:localIndex,
-          from :/\[/,
-          to   :`\[\n  ${name}Types,`
+        const fullPathLocalIndex = path.resolve(path.join(process.cwd(), localIndex))
+
+        const currentIndexContent = fs.readFileSync(fullPathLocalIndex, { encoding: 'utf8', flag: 'r' })
+        const shouldNotIncludeString = `${name}Types`
+        
+        if (!currentIndexContent.includes(shouldNotIncludeString)) {
+          const options1 = {
+            files:localIndex,
+            from :/\[/,
+            to   :`\[\n  ${name}Types,`
+          }
+          const options2 = {
+            files:localIndex,
+            from :/import/,
+            to   :`import ${name}Types from './${name}.graphql'\nimport`
+          }
+
+          const rResults1 = replace.sync(options1)
+          const rResults2 = replace.sync(options2)
+
+          this.log(`updated \x1b[36m\x1b[1m ${localIndex} \x1b[0m`)
+          //this.log(`with ${JSON.stringify(rResults1)}`)
         }
-        const options2 = {
-          files:localIndex,
-          from :/import/,
-          to   :`import ${name}Types from './${name}.graphql'\nimport`
+        else {
+          this.log(`not updated \x1b[33m\x1b[1m ${localIndex} \x1b[0m because the module is already exported`)
         }
 
-        const rResults1 = replace.sync(options1)
-        const rResults2 = replace.sync(options2)
-
-        this.log(`updated \x1b[36m\x1b[1m ${localIndex} \x1b[0m`)
-        this.log(`with ${JSON.stringify(rResults1)}`)
       }
 
       if (!mini){
