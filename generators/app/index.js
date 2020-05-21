@@ -33,6 +33,7 @@ module.exports = class extends Generator {
     } = this.options
 
     const [localpkg,schema] = fullname.split('|')
+    const local_package_name = localpkg.toUpperCase()
     const lower = schema ? schema.toLowerCase() : null
     const lower_plural = lower ? lower + 's' : null
     const camel = schema.charAt(0).toLowerCase() + schema.slice(1)
@@ -115,7 +116,7 @@ module.exports = class extends Generator {
         this.fs.copyTpl(
           this.templatePath('tests.js'),
           this.destinationPath(path.join(local, schema + '.test.js')),
-          { name, schema, lower_plural, version, pkg }
+          { name, schema, lower_plural, version, pkg, local_package_name }
         )
       }
 
