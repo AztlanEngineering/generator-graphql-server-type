@@ -1,5 +1,9 @@
 /* <%= pkg %> <%= version %> */
-import { assert, expect } from 'chai'
+import chai from 'chai'
+import chaiAsPromised from 'chai-as-promised'
+chai.use(chaiAsPromised)
+const { assert, expect } = chai
+
 import { <%= schema %>Controller as MainController } from '../controllers'
 import models from 'models'
 import * as faker from 'faker'

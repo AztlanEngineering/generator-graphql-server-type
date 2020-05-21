@@ -17,8 +17,10 @@ export default sequelize => {
   
   <%= schema %>.init({
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
+      type: DataTypes.UUIDV4,
+      defaultValue:Sequelize.UUIDV4,
+      //type: DataTypes.INTEGER,
+      //autoIncrement: true,
       primaryKey:true,
       allowNull:false,
     },
