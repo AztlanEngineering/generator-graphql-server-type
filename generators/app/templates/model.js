@@ -60,6 +60,11 @@ export default sequelize => {
   <%= schema %>.associate = models => {
     <%= schema %>.belongsTo(models.User) //this will give a foreign key to user here, and make it available from here
     //models.User.hasMany(<% schema %>) //this will give this model a UserId field and make it available from user
+    //The A.hasOne(B) association means that a One-To-One relationship exists between A and B, with the foreign key being defined in the target model (B).
+    //The A.belongsTo(B) association means that a One-To-One relationship exists between A and B, with the foreign key being defined in the source model (A).
+    //The A.hasMany(B) association means that a One-To-Many relationship exists between A and B, with the foreign key being defined in the target model (B).
+    //These three calls will cause Sequelize to automatically add foreign keys to the appropriate models (unless they are already present).
+    //The A.belongsToMany(B, { through: 'C' }) association means that a Many-To-Many relationship exists between A and B, using table C as junction table, which will have the foreign keys (aId and bId, for example). Sequelize will automatically create this model C (unless it already exists) and define the appropriate foreign keys on it.
   }
 
   return <%= schema %>
