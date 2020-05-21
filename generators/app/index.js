@@ -114,7 +114,7 @@ module.exports = class extends Generator {
 
         this.fs.copyTpl(
           this.templatePath('tests.js'),
-          this.destinationPath(path.join(local, schema + '.js')),
+          this.destinationPath(path.join(local, schema + '.test.js')),
           { name, schema, lower_plural, version, pkg }
         )
       }
@@ -181,7 +181,7 @@ module.exports = class extends Generator {
           const rResults2 = replace.sync(options2)
 
           this.log(`updated \x1b[36m\x1b[1m ${localIndex} \x1b[0m`)
-          tI//his.log(`with ${JSON.stringify(rResults1)}`)
+          //his.log(`with ${JSON.stringify(rResults1)}`)
         }
         else {
           this.log(`not updated \x1b[33m\x1b[1m ${localIndex} \x1b[0m because the module is already exported`)

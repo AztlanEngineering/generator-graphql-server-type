@@ -1,10 +1,10 @@
-/* <%= pkg %> <%= version %> */
+/* @fwrlines/generator-graphql-server-type 2.1.1 */
 import { assert, expect } from 'chai'
-import { <%= schema %>Controller as MainController } from '../controllers'
+import { MakeController as MainController } from '../controllers'
 import models from 'models'
 import * as faker from 'faker'
 
-const Model = models.<%= schema %>
+const Model = models.Make
 
 const generateFakeData = (options = {}) => {
   const data = {
@@ -25,67 +25,18 @@ const generateFakeData = (options = {}) => {
     final_data[e] = (e in options) ? options[e] : data[e]
   })
 
-  return { ...options, ...final_data }
+  return final_data
 }
 
-describe('<%= schema%> Model', function() {
-  /*
+describe('Make Controller', function() {
+
   before( function(){
+
   })
 
   beforeEach( function(){
-  })
-  */
 
-  describe('Model -> Key -> Code', function() {
-    it('Default Value -> The default code is a unique 64 char string', async function() {
-      const data1 = generateFakeData()
-      const data2 = generateFakeData()
-      const records = await Model.bulkCreate([data1, data2])
-      const { code:code1 } = records[0]
-      const { code:code2 } = records[1]
-      expect( code1 ).to.have.lengthOf(64)
-      expect( code2 ).to.have.lengthOf(64)
-      expect( code1 ).to.not.deep.equal(code2)
-      records.forEach((e) =>
-        e.destroy()
-      )
-    })
-  
   })
-  
-  describe('Model -> Virtual -> IsValid', function() {
-    it('Model API -> An instance is valid ioi it expires later than now', async function() {
-      const data1 = generateFakeData()
-      const data2 = generateFakeData({ expires: Date.now() - (Number(200 * 1000)) })
-      const records = await Model.bulkCreate([data1, data2])
-      expect( records[0].is_valid ).to.equal(true)
-      expect( records[1].is_valid ).to.equal(false)
-      records.forEach((e) =>
-        e.destroy()
-      )
-    })
-  
-  })
-
-  /*
-  afterEach( function(){
-  })
-
-  after( function(){
-  })
-  */
-})
-
-describe('<%= schema %> Controller', function() {
-  /*
-  before( function(){
-  })
-
-  beforeEach( function(){
-  })
-  */
-
 
   describe('Controller -> Get all', function() {
     it('Admin API -> The objects retrieved equals the objects looked for', async function() {
@@ -150,13 +101,15 @@ describe('<%= schema %> Controller', function() {
     })
   })
 
-  /*
   afterEach( function(){
+
   })
 
   after( function(){
+
   })
-  */
+
+
 })
 
 

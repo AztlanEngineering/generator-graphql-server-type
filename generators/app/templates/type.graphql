@@ -6,9 +6,12 @@ extend type Query {
 }
 
 extend type Mutation {
+  #Admin mutations
   add<%= name %>(input:<%= name %>Input!): <%= name %>!
   update<%= name %>(id: ID!, input: <%= name %>Input!): <%= name %>!
   delete<%= name %>(id: ID!): Boolean!
+
+  #User mutations
   }
 
 input <%= name %>Input {

@@ -10,13 +10,15 @@ module.exports = {
     'browser': true,
     'node': true,
     'commonjs': true,
-    'es6': true
+    'es6': true,
+    'mocha':true
   },
   'extends': [
     'eslint:recommended',
-    'eslint-config-synacor'
+    'plugin:mocha/recommended'
   ],
   'plugins': [
+    'mocha'
   ],
   'parser': 'babel-eslint',
   'rules':{
