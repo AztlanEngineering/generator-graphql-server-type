@@ -37,7 +37,7 @@ describe('<%= local_package_name %> -> <%= schema%> Model', function() {
   })
   */
 
-  describe('<%= schema %> Model -> Key -> Code', function() {
+  describe('Model -> Key -> Code', function() {
     it('Default Value -> The default code is a unique 64 char string', async function() {
       const data1 = generateFakeData()
       const data2 = generateFakeData()
@@ -54,7 +54,7 @@ describe('<%= local_package_name %> -> <%= schema%> Model', function() {
   
   })
   
-  describe('<%= schema %>Model -> Virtual -> IsValid', function() {
+  describe('Model -> Virtual -> IsValid', function() {
     it('Model API -> An instance is valid ioi it expires later than now', async function() {
       const data1 = generateFakeData()
       const data2 = generateFakeData({ expires: Date.now() - (Number(200 * 1000)) })
@@ -87,7 +87,7 @@ describe('<%= local_package_name %> -> <%= schema %> Controller', function() {
   */
 
 
-  describe('<%= schema %> Controller -> Get all', function() {
+  describe('Controller -> Get all', function() {
     it('Admin API -> The objects retrieved equals the objects looked for', async function() {
       const data1 = generateFakeData()
       const data2 = generateFakeData()
@@ -106,7 +106,7 @@ describe('<%= local_package_name %> -> <%= schema %> Controller', function() {
     })
   })
 
-  describe('<%= schema %> Controller -> Get one', function() {
+  describe('Controller -> Get one', function() {
     it('Admin API -> The object retrieved correspond to the objects looked for', async function() {
       const data = generateFakeData()
       const { id } = await Model.create( data )
@@ -116,7 +116,7 @@ describe('<%= local_package_name %> -> <%= schema %> Controller', function() {
     })
   })
 
-  describe('<%= schema %> Controller -> Add', function() {
+  describe('Controller -> Add', function() {
     it('Admin API -> The object created equals the specs given', async function() {
       const input = generateFakeData()
       const inst = await MainController.add({}, { input })
@@ -126,7 +126,7 @@ describe('<%= local_package_name %> -> <%= schema %> Controller', function() {
 
   })
 
-  describe('<%= schema %> Controller -> Update', function() {
+  describe('Controller -> Update', function() {
     it('Admin API -> The object is successfully updated', async function() {
       const data = generateFakeData()
       const { id } = await Model.create( data )
@@ -137,7 +137,7 @@ describe('<%= local_package_name %> -> <%= schema %> Controller', function() {
     })
   })
 
-  describe('<% schema %> Controller -> Delete', function() {
+  describe('Controller -> Delete', function() {
     it('Admin API -> The object is successfully deleted', async function() {
       const data = generateFakeData()
       const { id } = await Model.create( data )
