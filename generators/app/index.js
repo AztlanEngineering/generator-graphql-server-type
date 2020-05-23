@@ -156,7 +156,7 @@ module.exports = class extends Generator {
 
         this.fs.copyTpl(
           this.templatePath('initial-migration.js'),
-          this.destinationPath(path.join(local, `00_${pkg}_${lower_plural}_initial.migratio.js`)),
+          this.destinationPath(path.join(local, `00_${pkg}_${lower_plural}_initial.migration.js`)),
           { name, schema, lower_plural, version, pkg, local_package_name }
         )
       }
