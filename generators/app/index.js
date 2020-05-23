@@ -65,6 +65,7 @@ module.exports = class extends Generator {
     if (schema && !mini) {
       madeFolders.controllers=mkdirp.sync(localpkg + '/controllers')
       madeFolders.models     =mkdirp.sync(localpkg + '/models')
+      madeFolders.migrations     =mkdirp.sync(localpkg + '/migrations')
     }
     if (validation) {
       madeFolders.validation =mkdirp.sync(localpkg + '/validation')
@@ -144,6 +145,19 @@ module.exports = class extends Generator {
           this.templatePath('model.js'),
           this.destinationPath(path.join(local, schema + '.js')),
           { name, schema, lower_plural, version, pkg }
+        )
+      }
+
+      /* Migration */
+      if (!mini){
+        local = 'migrations/'
+        //localIndex = local + 'index.js'
+        //createOrAppendToIndex(`export { default as ${schema} } from './${schema}'\n`)
+
+        this.fs.copyTpl(
+          this.templatePath('initial-migration.js'),
+          this.destinationPath(path.join(local, `00_${pkg}_${lower_plural}_initial.migratio.js`)),
+          { name, schema, lower_plural, version, pkg, local_package_name }
         )
       }
 

@@ -61,6 +61,7 @@ export default sequelize => {
   
   <%= schema %>.associate = models => {
     <%= schema %>.belongsTo(models.User, {
+      targetKey:'id',
       foreignKey:{
         name     :'userId',
         type     :DataTypes.UUID,
