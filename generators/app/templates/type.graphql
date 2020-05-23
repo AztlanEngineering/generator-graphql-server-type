@@ -1,7 +1,7 @@
 # <%= pkg %> <%= version %> 
 extend type Query {
   all<%= name %>s: [<%= name %>]
-  get<%= name %>(id: ID!): <%= name %>
+  get<%= name %>(id: ID!): <%= name %>!
   #paginated<%= name %> (page:Int, category: String):Paginated<%= name %>s
 }
 
@@ -9,7 +9,7 @@ extend type Mutation {
   #Admin mutations
   add<%= name %>(input:<%= name %>Input!): <%= name %>!
   update<%= name %>(id: ID!, input: <%= name %>Input!): <%= name %>!
-  delete<%= name %>(id: ID!): Boolean!
+  delete<%= name %>(id: ID!): ID!
 
   #User mutations
   }
@@ -25,8 +25,9 @@ type <%= name %> {
   x:Int
   y:String
   z:Boolean
-  createdAt:Float
-  updatedAt:Float
+  zz:Float
+  createdAt:Int!
+  updatedAt:Int!
 }
 
 #type Paginated<%= name %>s {
