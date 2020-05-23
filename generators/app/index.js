@@ -165,6 +165,12 @@ module.exports = class extends Generator {
           this.destinationPath(path.join(local, `01_${pkg}_${lower_plural}_association_.migration.js`)),
           { name, schema, lower_plural, version, pkg, local_package_name }
         )
+
+        this.fs.copyTpl(
+          this.templatePath('migration-index.js'),
+          this.destinationPath(path.join(local, `02_${pkg}_${lower_plural}_index_.migration.js`)),
+          { name, schema, lower_plural, version, pkg, local_package_name }
+        )
       }
 
       /* Resolvers */

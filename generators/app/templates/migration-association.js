@@ -1,3 +1,4 @@
+/* <%= pkg %> <%= version %> */
 const tableName = '' //Should equal the one defined in models
 const foreignKeyColumnName = ''
 const foreignModelTableName = ''
