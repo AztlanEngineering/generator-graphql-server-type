@@ -4,11 +4,12 @@ const tableName = '' //Should equal the one defined in models
 async function up(queryInterface, Sequelize) {
   return queryInterface.createTable(tableName, {
     id:{
-      type        :Sequelize.DataTypes.UUID,
-      defaultValue:Sequelize.UUIDV4,
-      allowNull   :false,
-      primaryKey  :true,
+      type      :Sequelize.DataTypes.UUID,
+      allowNull :false,
+      primaryKey:true,
     },
+
+
     createdAt:{
       type     :Sequelize.DataTypes.DATE,
       allowNull:false,
