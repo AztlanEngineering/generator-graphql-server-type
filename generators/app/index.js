@@ -144,7 +144,7 @@ module.exports = class extends Generator {
         this.fs.copyTpl(
           this.templatePath('model.js'),
           this.destinationPath(path.join(local, schema + '.js')),
-          { name, schema, lower_plural, version, pkg, localpkg }
+          { name, schema, lower, lower_plural, version, pkg, localpkg }
         )
       }
 

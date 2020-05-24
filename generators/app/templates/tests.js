@@ -22,6 +22,11 @@ const generateFakeData = (options = {}) => {
     car        :faker.random.boolean(),
     motorcycle :faker.random.boolean(),
     seotext    :faker.lorem.paragraph(5),
+    data         :{
+      content :faker.random.words(8),
+      otherKey:faker.random.words(8)
+    }
+
   }
 
   const final_data = {}

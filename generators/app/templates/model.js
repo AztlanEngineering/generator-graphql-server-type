@@ -61,6 +61,7 @@ export default sequelize => {
   
   <%= schema %>.associate = models => {
     <%= schema %>.belongsTo(models.User, {
+      as:'user',
       targetKey:'id',
       foreignKey:{
         name     :'userId',
@@ -70,7 +71,20 @@ export default sequelize => {
       //'onDelete':'SET NULL', //RESTRICT, CASCADE, SET DEFAULT
       //'onUpdate':'CASCADE', //RESTRICT, SET_NULL, SET DEFAULT
       
-    }) //this will give a foreign key to user here, and make it available from here
+    }) //this will create a foreign key to user in the <%= schema%> model, and make it possible to query from here
+
+    models.User.hasOne(<%= schema %>, {
+      as:'<%= lower %>',
+      targetKey:'id',
+      foreignKey:{
+        name     :'userId',
+        type     :Sequelize.DataTypes.UUID,
+        //allowNull:false
+      },
+      //'onDelete':'SET NULL', //RESTRICT, CASCADE, SET DEFAULT
+      //'onUpdate':'CASCADE', //RESTRICT, SET_NULL, SET DEFAULT
+      
+    }) //this will add to the user model the possibility to auery based on the foreign key, which is still defined in the <%= schema %> model
     //models.User.hasMany(<% schema %>) //this will give this model a UserId field and make it available from user
     //The A.hasOne(B) association means that a One-To-One relationship exists between A and B, with the foreign key being defined in the target model (B).
     //The A.belongsTo(B) association means that a One-To-One relationship exists between A and B, with the foreign key being defined in the source model (A).
