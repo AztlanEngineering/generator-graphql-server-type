@@ -146,7 +146,7 @@ describe('<%= local_package_name %> -> <%= schema %> Controller', function() {
       const data = generateFakeData()
       const { id } = await Model.create( data )
       const success = await MainController.delete({}, { id })
-      assert( success == true, 'The controller should respond true to the deletion command' )
+      assert( success === id, `The controller should respond ${id} to the deletion command`)
       await Model.findByPk(id, { transaction: null }) //there is a little time for the deletion to actually happen, so we auery twice
       const objectShouldntRemain = await Model.findByPk(id, { transaction: null })
       expect( objectShouldntRemain ).to.equal(null)

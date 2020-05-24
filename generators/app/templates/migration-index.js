@@ -3,7 +3,7 @@ const tableName = '' //Should equal the one defined in models
 const indexName = tableName + ''
 
 async function up(queryInterface, Sequelize) {
-  return queryInterface.createIndex(
+  return queryInterface.addIndex(
     tableName,
     {
       name  :indexName,
