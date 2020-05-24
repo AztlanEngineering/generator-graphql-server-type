@@ -54,7 +54,7 @@ export default sequelize => {
     modelName:'<%= schema %>',
     updatedAt:'updatedAt',
     createdAt:'createdAt'
-    //tableName: '<%= lower_plural %>'
+    //tableName: '<%= local_package_name%>_<%= lower_plural %>'
     //freezeTableName: true
   })
 
