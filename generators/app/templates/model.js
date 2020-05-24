@@ -52,9 +52,9 @@ export default sequelize => {
   },{
     sequelize,
     modelName:'<%= schema %>',
+    tableName: '<%= localpkg %>_<%= lower_plural %>',
     updatedAt:'updatedAt',
-    createdAt:'createdAt'
-    //tableName: '<%= local_package_name%>_<%= lower_plural %>'
+    createdAt:'createdAt',
     //freezeTableName: true
   })
 
