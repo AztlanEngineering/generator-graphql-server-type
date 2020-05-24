@@ -1,5 +1,5 @@
 /* <%= pkg %> <%= version %> */
-import { Sequelize, DataTypes, Model } from 'sequelize'
+import { Sequelize, Model } from 'sequelize'
 
 export default sequelize => {
   class <%= schema %> extends Model {
@@ -17,19 +17,19 @@ export default sequelize => {
   
   <%= schema %>.init({
     id: {
-      type: DataTypes.UUID,
+      type: Sequelize.DataTypes.UUID,
       defaultValue:Sequelize.UUIDV4,
-      //type: DataTypes.INTEGER,
+      //type: Sequelize.DataTypes.INTEGER,
       //autoIncrement: true,
       primaryKey:true,
       allowNull:false,
     },
     a: {
-      type: DataTypes.STRING,
-      //type: DataTypes.BOOLEAN,
-      //type: DataTypes.INTEGER,
-      //type: DataTypes.BIGINT,
-      //type: DataTypes.DATE,
+      type: Sequelize.DataTypes.STRING,
+      //type: Sequelize.DataTypes.BOOLEAN,
+      //type: Sequelize.DataTypes.INTEGER,
+      //type: Sequelize.DataTypes.BIGINT,
+      //type: Sequelize.DataTypes.DATE,
       allowNull: false,
       defaultValue:'john',
       //unique:true
@@ -37,7 +37,7 @@ export default sequelize => {
     },
 
     b: {
-      type: DataTypes.BOOLEAN,
+      type: Sequelize.DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue:false,
       //field:'column_name_here'
@@ -45,7 +45,7 @@ export default sequelize => {
   
     /*
     uuid:{
-      type: DataTypes.UUID,
+      type: Sequelize.DataTypes.UUID,
       defaultValue: Sequelize.UUIDV4
     }
     */
@@ -64,7 +64,7 @@ export default sequelize => {
       targetKey:'id',
       foreignKey:{
         name     :'userId',
-        type     :DataTypes.UUID,
+        type     :Sequelize.DataTypes.UUID,
         //allowNull:false
       },
       //'onDelete':'SET NULL', //RESTRICT, CASCADE, SET DEFAULT
