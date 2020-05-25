@@ -65,7 +65,9 @@ module.exports = class extends Generator {
     if (schema && !mini) {
       madeFolders.controllers=mkdirp.sync(localpkg + '/controllers')
       madeFolders.models     =mkdirp.sync(localpkg + '/models')
-      madeFolders.migrations     =mkdirp.sync(localpkg + '/migrations')
+      madeFolders.migrations =mkdirp.sync(localpkg + '/migrations')
+      madeFolders.migrations =mkdirp.sync(localpkg + '/tests')
+      madeFolders.migrations =mkdirp.sync(localpkg + '/tests/generators')
     }
     if (validation) {
       madeFolders.validation =mkdirp.sync(localpkg + '/validation')
@@ -119,6 +121,16 @@ module.exports = class extends Generator {
           this.destinationPath(path.join(local, schema + '.test.js')),
           { name, schema, lower_plural, version, pkg, local_package_name }
         )
+
+        local = 'tests/generators/'
+        this.fs.copyTpl(
+          this.templatePath('faker-generator.js'),
+          this.destinationPath(path.join(local, schema + '.js')),
+          { name, schema, lower_plural, version, pkg, local_package_name }
+        )
+
+        localIndex = local + 'index.js'
+        createOrAppendToIndex(`export { default as generateTest${schema} } from './${schema}'\n`)
       }
 
       /* Controller */

@@ -8,34 +8,10 @@ import { <%= schema %>Controller as MainController } from '../controllers'
 import models from 'models'
 import * as faker from 'faker'
 
+import { generateTest<%= schema %> as generateFakeData } from './generators'
+
+
 const Model = models.<%= schema %>
-
-const generateFakeData = (options = {}) => {
-  const data = {
-    name       :faker.company.companyName(),
-    slug       :faker.helpers.slugify(faker.company.companyName().toLowerCase()),
-    active_from:'1920',
-    active_to  :'present',
-    country    :faker.address.country(),
-    is_common  :faker.random.boolean(),
-    is_active  :faker.random.boolean(),
-    car        :faker.random.boolean(),
-    motorcycle :faker.random.boolean(),
-    seotext    :faker.lorem.paragraph(5),
-    data         :{
-      content :faker.random.words(8),
-      otherKey:faker.random.words(8)
-    }
-
-  }
-
-  const final_data = {}
-  Object.keys(data).forEach(e => {
-    final_data[e] = (e in options) ? options[e] : data[e]
-  })
-
-  return { ...options, ...final_data }
-}
 
 describe('<%= local_package_name %> -> <%= schema%> Model', function() {
   /*
@@ -108,6 +84,8 @@ describe('<%= local_package_name %> -> <%= schema %> Controller', function() {
       const rows = await MainController.all({})
       const r1 = await Model.findByPk(id1)
       const r2 = await Model.findByPk(id2)
+      assert.exists(r1.id, 'We shouldnt deep test inclusion of empty item')
+      assert.exists(r2.id, 'We shouldnt deep test inclusion of empty item')
       expect(rows).to.deep.include.members([ r1, r2 ])
       records.forEach((e) =>
         e.destroy()
