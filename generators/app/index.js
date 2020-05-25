@@ -58,6 +58,12 @@ module.exports = class extends Generator {
 		  root:mkdirp.sync(localpkg)
     }
 
+    this.fs.copyTpl(
+      this.templatePath('dependencies.json'),
+      this.destinationPath(path.join(localpkg, 'dependencies.json')),
+      //{ name, schema, lower_plural, version, pkg, local_package_name }
+    )
+
     if (schema) {
       madeFolders.resolvers=mkdirp.sync(localpkg + '/resolvers')
       madeFolders.types    =mkdirp.sync(localpkg + '/types')

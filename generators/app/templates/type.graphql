@@ -22,12 +22,14 @@ input <%= name %>Input {
 
 type <%= name %> {
   id:ID!
+  name:String!
+  slug:String!
   x:Int
   y:String
   z:Boolean
   zz:Float
-  createdAt:Int!
-  updatedAt:Int!
+  createdAt:Float!
+  updatedAt:Float!
 }
 
 #type Paginated<%= name %>s {
