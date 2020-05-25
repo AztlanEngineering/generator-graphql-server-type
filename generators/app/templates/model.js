@@ -42,6 +42,13 @@ export default sequelize => {
       defaultValue:false,
       //field:'column_name_here'
     },
+
+    __string:{
+      type:new Sequelize.DataTypes.VIRTUAL(Sequelize.DataTypes.STRING, ['name']),
+      get :function() {
+        return this.get('name').slice(0,20)
+      }
+    },
   
     /*
     uuid:{
