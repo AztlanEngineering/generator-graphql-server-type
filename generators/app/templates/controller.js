@@ -4,6 +4,11 @@ import { ObjectNotFoundError } from 'utils'
 
 const Model = models.<%= name %>
 
+const include = [
+  { all: true }
+  //{ model: models.DictionaryAuthor, as: 'author' }
+]
+
 /*
 import {
   ConfigurationError,
@@ -14,6 +19,7 @@ import {
 */
 
 const Controller = {
+  //all:(root, args) => Model.findAll({include}),
   all:(root, args) => Model.findAll({}),
 
   /*
@@ -36,8 +42,10 @@ const Controller = {
   },
   */
 
+  //get:(root, { id }) => Model.findByPk( id, { include } ),
   get:(root, { id }) => Model.findByPk( id ),
 
+  //add:async (root, { input }) => await Model.create( input, { include } ),
   add:async (root, { input }) => await Model.create( input ),
 
   delete:async (root, { id }) => {
