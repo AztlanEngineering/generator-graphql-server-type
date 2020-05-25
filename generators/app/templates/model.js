@@ -43,7 +43,7 @@ export default sequelize => {
       //field:'column_name_here'
     },
 
-    __string:{
+    _string:{
       type:new Sequelize.DataTypes.VIRTUAL(Sequelize.DataTypes.STRING, ['name']),
       get :function() {
         return this.get('name').slice(0,20)

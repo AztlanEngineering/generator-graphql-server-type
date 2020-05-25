@@ -22,6 +22,7 @@ input <%= name %>Input {
 
 type <%= name %> {
   id:ID!
+  _string:String!
   name:String!
   slug:String!
   x:Int
