@@ -19,8 +19,10 @@ import {
 */
 
 const Controller = {
-  //all:(root, args) => Model.findAll({include}),
-  all:(root, args) => Model.findAll({}),
+  all:(root, args) => Model.findAll({
+    //include,
+    plain:true
+  }),
 
   /*
   paginated:(r, {
@@ -42,11 +44,15 @@ const Controller = {
   },
   */
 
-  //get:(root, { id }) => Model.findByPk( id, { include } ),
-  get:(root, { id }) => Model.findByPk( id ),
+  get:(root, { id }) => Model.findByPk( id, { 
+    //include,
+    plain:true 
+  } ),
 
-  //add:async (root, { input }) => await Model.create( input, { include } ),
-  add:async (root, { input }) => await Model.create( input ),
+  add:async (root, { input }) => await Model.create( input, {
+    //include,
+    plain:true
+  }),
 
   delete:async (root, { id }) => {
     const item = await Model.findByPk(id).catch(e => {
