@@ -21,7 +21,9 @@ import {
 const Controller = {
   all:(root, args) => Model.findAll({
     //include,
-    plain:true
+    raw:true,
+    nest:true,
+    plain:true // https://github.com/sequelize/sequelize/issues/6950
   }),
 
   /*
