@@ -34,7 +34,7 @@ const Controller = {
     //include,
     raw:true,
     nest:true,
-    plain:true // https://github.com/sequelize/sequelize/issues/6950
+    //plain:true // https://github.com/sequelize/sequelize/issues/6950
   }),
 
   get:(root, { id }) => Model.findByPk( id, { 
@@ -73,7 +73,7 @@ const Controller = {
   //
   // 2. PERSONAL METHODS = ONLY AVAILABLE TO THE OWNER OF THE OBJECT
   // THIS METHOD SHOULD BE LOGIN PROTECTED AT THE RESOLVER LEVEL
-  // WE FETCH THE OBJECT HERE AND THEN THROW AN AUTHENTICATION ERROR IF CURRENT USER NOT THE OWNER. 
+  // WE FETCH THE OBJECT HERE AND THEN THROW AN OBJECT NOT FOUND ERROR IF CURRENT USER NOT THE OWNER. 
   // THESE METHODS SHOULD BE TESTED IN BOTH AUTHORIZED AND NOT AUTHORIZED CONTEXT
   //
   //

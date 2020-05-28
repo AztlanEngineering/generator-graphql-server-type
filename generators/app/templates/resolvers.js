@@ -2,7 +2,7 @@
 import { <%= name %>Controller as MainController } from '../controllers'
 import { 
   suMethod as su, 
-  loggedInMethod as li 
+  userMethod as um 
 } from 'utils'
 
 export default {
@@ -18,13 +18,13 @@ export default {
     },
     /*
     async addMy<%= name %>(r, a, c) {
-      return li(MainController.add(r, a), c.user)
+      return li(MainController.addMine(r, a), c.user)
     },
     async deleteMy<%= name %>(r, a, c) {
-      return li(MainController.del(r, a), c.user)
+      return li(MainController.deleteMine(r, a), c.user)
     },
     async updateMy<%= name %>(r, a, c) {
-      return li(MainController.update(r, a), c.user)
+      return li(MainController.updateMine(r, a), c.user)
     },
     */
   },
@@ -41,8 +41,7 @@ export default {
     /*
     allMy<%= name %>s(r, a, c) {
       // use context if you want to restrict the usage
-      return su(MainController.allMine(r, a), c.user)
-      //return li(<%= name %>Controller.paginated(r, a), c.user)
+      return li(MainController.allMine(r, a), c.user)
     },
     getMy<%= name %>(r, a, c) {
       // use context if you want to restrict the usage
