@@ -1,6 +1,9 @@
 /* <%= pkg %> <%= version %> */
 import { <%= name %>Controller as MainController } from '../controllers'
-import { suMethod as su } from 'utils'
+import { 
+  suMethod as su, 
+  loggedInMethod as li 
+} from 'utils'
 
 export default {
   Mutation:{
@@ -12,7 +15,18 @@ export default {
     },
     async update<%= name %>(r, a, c) {
       return su(MainController.update(r, a), c.user)
-    }
+    },
+    /*
+    async addMy<%= name %>(r, a, c) {
+      return li(MainController.add(r, a), c.user)
+    },
+    async deleteMy<%= name %>(r, a, c) {
+      return li(MainController.del(r, a), c.user)
+    },
+    async updateMy<%= name %>(r, a, c) {
+      return li(MainController.update(r, a), c.user)
+    },
+    */
   },
   Query:{
     all<%= name %>s(r, a, c) {
@@ -23,7 +37,18 @@ export default {
     get<%= name %>(r, a, c) {
       // use context if you want to restrict the usage
       return su(MainController.get(r, a), c.user)
+    },
+    /*
+    allMy<%= name %>s(r, a, c) {
+      // use context if you want to restrict the usage
+      return su(MainController.allMine(r, a), c.user)
+      //return li(<%= name %>Controller.paginated(r, a), c.user)
+    },
+    getMy<%= name %>(r, a, c) {
+      // use context if you want to restrict the usage
+      return li(MainController.getMine(r, a), c.user)
     }
+    */
   }
 }
 
