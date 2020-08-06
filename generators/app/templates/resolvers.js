@@ -11,7 +11,7 @@ export default {
       return su(MainController.add(r, a), c.user)
     },
     async delete<%= name %>(r, a, c) {
-      return su(MainController.del(r, a), c.user)
+      return su(MainController.delete(r, a), c.user)
     },
     async update<%= name %>(r, a, c) {
       return su(MainController.update(r, a), c.user)
