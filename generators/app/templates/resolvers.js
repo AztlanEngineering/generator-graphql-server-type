@@ -34,6 +34,11 @@ export default {
       return su(MainController.all(r, a), c.user)
       //return su(<%= name %>Controller.paginated(r, a), c.user)
     },
+    /*
+    search<%= name %>s(r, a, c) {
+      // use context if you want to restrict the usage
+      return su(MainController.search(r, a), c.user)
+    },*/
     get<%= name %>(r, a, c) {
       // use context if you want to restrict the usage
       return su(MainController.get(r, a), c.user)

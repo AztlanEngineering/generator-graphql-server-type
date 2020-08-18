@@ -1,6 +1,7 @@
 # <%= pkg %> <%= version %> 
 extend type Query {
   all<%= name %>s: [<%= name %>]
+  #search<%= name %>s(expression: String!):[<%= name %>]
   get<%= name %>(id: ID!): <%= name %>!
   #paginated<%= name %> (page:Int, category: String):Paginated<%= name %>s
 }

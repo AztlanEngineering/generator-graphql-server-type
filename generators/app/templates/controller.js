@@ -37,6 +37,30 @@ const Controller = {
     //plain:true // https://github.com/sequelize/sequelize/issues/6950
   }),
 
+  /*
+  search:(root, { expression }) => {
+    return (expression.length < minSearchLength) ?
+      null : Model.findAll({
+        where:{
+          [Op.or]:[
+            {
+              name:{
+                [Op.iLike]:`%${expression}%`,
+              }
+            },
+            {
+              slug:{
+                [Op.iLike]:`%${expression}%`,
+              }
+            }
+          ],
+        }
+  
+      })
+  
+  },*/
+
+
   get:(root, { id }) => Model.findByPk( id, { 
     //include,
     plain:true 
