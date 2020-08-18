@@ -1,4 +1,5 @@
 /* <%= pkg %> <%= version %> */
+import { Op } from 'sequelize'
 import models from 'models'
 import { ObjectNotFoundError } from 'utils'
 
