@@ -126,6 +126,22 @@ describe('<%= local_package_name %> -> <%= schema %> Controller', function() {
          e.destroy()
        )
     })
+
+    
+   describe('Controller -> Search', function() {
+     it('Admin API -> We create an item in the db. It correctly shows up in the search results', async function() {
+       const data = generateFakeData()
+       const inst = await Model.create( data )
+       const results = await MainController.search({}, { expression:data.name.substring(0,3).toLowerCase() })
+       const originalInst = results.find(e => e.id === inst.id)
+       //console.log('Found original inst', originalInst.toJSON())
+       expect(originalInst).to.deep.include(data)
+
+       inst.destroy()
+     })
+   })
+
+
     
     /*
     it('Admin API -> The objects retrieved equals the objects looked for, including associations', async function() {
