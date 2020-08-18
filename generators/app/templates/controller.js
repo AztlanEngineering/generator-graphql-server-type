@@ -5,6 +5,7 @@ import { ObjectNotFoundError } from 'utils'
 //import { AuthenticationError } from 'apollo-server'
 
 const Model = models.<%= name %>
+const minSearchLength = 3
 
 
 const ownerIdKey = 'ownerId' //The model field that defined the ownership relation with the user model
