@@ -128,6 +128,7 @@ describe('<%= local_package_name %> -> <%= schema %> Controller', function() {
     })
 
     
+    /*
    describe('Controller -> Search', function() {
      it('Admin API -> We create an item in the db. It correctly shows up in the search results', async function() {
        const data = generateFakeData()
@@ -139,7 +140,7 @@ describe('<%= local_package_name %> -> <%= schema %> Controller', function() {
 
        inst.destroy()
      })
-   })
+   })*/
 
 
     
