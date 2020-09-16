@@ -21,28 +21,37 @@ input <%= name %>Input {
   z:Boolean
   }
 
-type <%= name %> {
+type <%= name %> implements BaseNode {
   id:ID!
   _string:String!
+
+  createdAt:Float!
+  updatedAt:Float!
+
   name:String!
   slug:String!
   x:Int
   y:String
   z:Boolean
   zz:Float
-  createdAt:Float!
-  updatedAt:Float!
 }
 
-#type Paginated<%= name %>s {
-#  docs: [<%= name %>]
-#  totalDocs: Int!
-#  limit: Int!
-#  hasPrevPage: Boolean!
-#  hasNextPage: Boolean!
-#  page: Int!
-#  totalPages: Int!
-#  pagingCounter: Int!
-#  prevPage: Int
-#  nextPage: Int
+#type Paginated<%= name %>s implements BasePaginator {
+  # We send back the query parameters for confirmation if needed
+
+#  limit:Int!
+#  offset:Int!
+#  sortBy:String!
+
+
+  #  Paginator Metadata
+
+#  totalDocs:Int!
+#  totalPages:Int!
+#  currentPage:Int!
+#  hasNextPage:Boolean!
+
+  #  Every subtype needs to implement this
+#  nodes:[Type]
+
 #}

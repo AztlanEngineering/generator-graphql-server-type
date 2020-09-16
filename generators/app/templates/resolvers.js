@@ -4,6 +4,7 @@ import {
   suMethod as su, 
   userMethod as um 
 } from 'utils'
+//import qualityValidator from '../validation/<%= name %>.quality.js'
 
 export default {
   Mutation:{
@@ -53,6 +54,13 @@ export default {
       return li(MainController.getMine(r, a), c.user)
     }
     */
+  },
+  /*
+  <%= name %>:{
+    _state(r, a, c) {
+      return qualityValidator(r)
+    }
   }
+  */
 }
 
